@@ -288,7 +288,7 @@ to write an explicit <cite>.create()</cite> method.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.audio_serializers.</span></span><span class="sig-name descname"><span class="pre">AudioSearchRequestSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.get_search_request_source_serializer.&lt;locals&gt;.MediaSearchRequestSourceSerializer</span></code>, <a class="reference internal" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer" title="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.MediaSearchRequestSerializer</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.request.media.get_search_request_source_serializer.&lt;locals&gt;.MediaSearchRequestSourceSerializer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.request.media.MediaSearchRequestSerializer</span></code></p>
 <p>Parse and validate search query string parameters.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.fields_names">
@@ -296,19 +296,11 @@ to write an explicit <cite>.create()</cite> method.</p>
 <dd><p>Keep the fields names in sync with the actual fields below as this list is
 used to generate Swagger documentation.</p>
 </dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.validate_category">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.validate_category" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.validate_duration">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.validate_duration" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSearchSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.audio_serializers.</span></span><span class="sig-name descname"><span class="pre">AudioSearchSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSearchSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#catalog.api.serializers.media_serializers.MediaSearchSerializer" title="catalog.api.serializers.media_serializers.MediaSearchSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.MediaSearchSerializer</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.response.media.MediaSearchSerializer</span></code></p>
 <p>The full audio search response.
 This serializer is purely representational and not actually used to
 serialize the response.</p>
@@ -316,7 +308,7 @@ serialize the response.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.audio_serializers.</span></span><span class="sig-name descname"><span class="pre">AudioSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.get_hyperlinks_serializer.&lt;locals&gt;.MediaHyperlinksSerializer</span></code>, <a class="reference internal" href="#catalog.api.serializers.media_serializers.MediaSerializer" title="catalog.api.serializers.media_serializers.MediaSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.MediaSerializer</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.response.media.get_hyperlinks_serializer.&lt;locals&gt;.MediaHyperlinksSerializer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.response.media.MediaSerializer</span></code></p>
 <p>A single audio file. Used in search results.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSerializer.Meta">
@@ -436,7 +428,7 @@ to write an explicit <cite>.create()</cite> method.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchRequestSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.image_serializers.</span></span><span class="sig-name descname"><span class="pre">ImageSearchRequestSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchRequestSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.get_search_request_source_serializer.&lt;locals&gt;.MediaSearchRequestSourceSerializer</span></code>, <a class="reference internal" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer" title="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.MediaSearchRequestSerializer</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.request.media.get_search_request_source_serializer.&lt;locals&gt;.MediaSearchRequestSourceSerializer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.request.media.MediaSearchRequestSerializer</span></code></p>
 <p>Parse and validate search query string parameters.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.fields_names">
@@ -444,23 +436,11 @@ to write an explicit <cite>.create()</cite> method.</p>
 <dd><p>Keep the fields names in sync with the actual fields below as this list is
 used to generate Swagger documentation.</p>
 </dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.validate_aspect_ratio">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_aspect_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.validate_aspect_ratio" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.validate_category">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.validate_category" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.validate_size">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.validate_size" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.image_serializers.</span></span><span class="sig-name descname"><span class="pre">ImageSearchSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#catalog.api.serializers.media_serializers.MediaSearchSerializer" title="catalog.api.serializers.media_serializers.MediaSearchSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.MediaSearchSerializer</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.response.media.MediaSearchSerializer</span></code></p>
 <p>The full image search response.
 This serializer is purely representational and not actually used to
 serialize the response.</p>
@@ -468,7 +448,7 @@ serialize the response.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.image_serializers.</span></span><span class="sig-name descname"><span class="pre">ImageSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.get_hyperlinks_serializer.&lt;locals&gt;.MediaHyperlinksSerializer</span></code>, <a class="reference internal" href="#catalog.api.serializers.media_serializers.MediaSerializer" title="catalog.api.serializers.media_serializers.MediaSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.media_serializers.MediaSerializer</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.response.media.get_hyperlinks_serializer.&lt;locals&gt;.MediaHyperlinksSerializer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.serializers.response.media.MediaSerializer</span></code></p>
 <p>A single image. Used in search results.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSerializer.Meta">
@@ -531,162 +511,8 @@ used to generate Swagger documentation.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
 </dd></dl>
 </section>
-<section id="module-catalog.api.serializers.media_serializers">
-<span id="catalog-api-serializers-media-serializers-module"></span><h2>catalog.api.serializers.media_serializers module<a class="headerlink" href="#module-catalog.api.serializers.media_serializers" title="Permalink to this headline">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">MediaSearchRequestSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
-<p>This serializer parses and validates search query string parameters.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.DeprecatedParam">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DeprecatedParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">successor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.DeprecatedParam" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.DeprecatedParam.original">
-<span class="sig-name descname"><span class="pre">original</span></span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.DeprecatedParam.original" title="Permalink to this definition">#</a></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.DeprecatedParam.successor">
-<span class="sig-name descname"><span class="pre">successor</span></span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.DeprecatedParam.successor" title="Permalink to this definition">#</a></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-</dd></dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.deprecated_params">
-<span class="sig-name descname"><span class="pre">deprecated_params</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[DeprecatedParam(original='li',</span> <span class="pre">successor='license'),</span> <span class="pre">DeprecatedParam(original='lt',</span> <span class="pre">successor='license_type'),</span> <span class="pre">DeprecatedParam(original='pagesize',</span> <span class="pre">successor='page_size'),</span> <span class="pre">DeprecatedParam(original='provider',</span> <span class="pre">successor='source')]</span></em><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.deprecated_params" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.fields_names">
-<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa']</span></em><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
-<dd><p>Keep the fields names in sync with the actual fields below as this list is
-used to generate Swagger documentation.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate">
-<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_creator">
-<span class="sig-name descname"><span class="pre">validate_creator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_creator" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_extension">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_extension" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_license">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_license</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_license" title="Permalink to this definition">#</a></dt>
-<dd><p>Checks whether license is a valid license code.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_license_type">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_license_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_license_type" title="Permalink to this definition">#</a></dt>
-<dd><p>Checks whether license type is a known collection of licenses.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_q">
-<span class="sig-name descname"><span class="pre">validate_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_q" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_tags">
-<span class="sig-name descname"><span class="pre">validate_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_tags" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_title">
-<span class="sig-name descname"><span class="pre">validate_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_title" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-</dd></dl>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">MediaSearchSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
-<p>This serializer serializes the full media search response. The class should
-be inherited by all individual media serializers.</p>
-</dd></dl>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">MediaSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
-<p>This serializer serializes a single media file. The class should be
-inherited by all individual media serializers.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSerializer.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSerializer.Meta" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'title',</span> <span class="pre">'foreign_landing_url',</span> <span class="pre">'url',</span> <span class="pre">'creator',</span> <span class="pre">'creator_url',</span> <span class="pre">'filesize',</span> <span class="pre">'filetype',</span> <span class="pre">'license',</span> <span class="pre">'license_version',</span> <span class="pre">'license_url',</span> <span class="pre">'provider',</span> <span class="pre">'source',</span> <span class="pre">'category',</span> <span class="pre">'tags',</span> <span class="pre">'mature',</span> <span class="pre">'attribution',</span> <span class="pre">'thumbnail',</span> <span class="pre">'fields_matched']</span></em><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
-<dd><p>Keep the fields names in sync with the actual fields below as this list is
-used to generate Swagger documentation.</p>
-</dd></dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSerializer.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="models.html#catalog.api.models.media.AbstractMedia" title="catalog.api.models.media.AbstractMedia"><code class="xref py py-class docutils literal notranslate"><span class="pre">catalog.api.models.media.AbstractMedia</span></code></a></p>
-</dd></dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSerializer.build_property_field">
-<span class="sig-name descname"><span class="pre">build_property_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSerializer.build_property_field" title="Permalink to this definition">#</a></dt>
-<dd><p>Overrides the built-in property field builder to use docstrings as the Swagger
-help text for fields.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>field_name</strong> – the name of the property for which the field is being built</p></li>
-<li><p><strong>model_class</strong> – the <code class="docutils literal notranslate"><span class="pre">class</span></code> instance for the Django model</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the Field subclass to use and the keyword arguments to pass to it</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSerializer.to_representation">
-<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSerializer.to_representation" title="Permalink to this definition">#</a></dt>
-<dd><p>Object instance -&gt; Dict of primitive datatypes.</p>
-</dd></dl>
-</dd></dl>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaThumbnailRequestSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">MediaThumbnailRequestSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaThumbnailRequestSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
-<p>This serializer parses and validates thumbnail query string parameters.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaThumbnailRequestSerializer.validate">
-<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaThumbnailRequestSerializer.validate" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-</dd></dl>
-<dl class="py class">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.TagSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">TagSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.TagSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
-</dd></dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.format_enums">
-<span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">format_enums</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#catalog.api.serializers.media_serializers.format_enums" title="Permalink to this definition">#</a></dt>
-<dd><p>Format a list of strings into a combined string where items are comma separated and
-surrounded by backticks.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>values</strong> – the list of valid values</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a string representation of these values</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.get_hyperlinks_serializer">
-<span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">get_hyperlinks_serializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">media_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.get_hyperlinks_serializer" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.get_search_request_source_serializer">
-<span class="sig-prename descclassname"><span class="pre">catalog.api.serializers.media_serializers.</span></span><span class="sig-name descname"><span class="pre">get_search_request_source_serializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">media_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.get_search_request_source_serializer" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<section id="catalog-api-serializers-media-serializers-module">
+<h2>catalog.api.serializers.media_serializers module<a class="headerlink" href="#catalog-api-serializers-media-serializers-module" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="module-catalog.api.serializers.oauth2_serializers">
 <span id="catalog-api-serializers-oauth2-serializers-module"></span><h2>catalog.api.serializers.oauth2_serializers module<a class="headerlink" href="#module-catalog.api.serializers.oauth2_serializers" title="Permalink to this headline">#</a></h2>
@@ -828,7 +654,7 @@ surrounded by backticks.</p>
 <li><a class="reference internal" href="#module-catalog.api.serializers.audio_serializers">catalog.api.serializers.audio_serializers module</a></li>
 <li><a class="reference internal" href="#module-catalog.api.serializers.error_serializers">catalog.api.serializers.error_serializers module</a></li>
 <li><a class="reference internal" href="#module-catalog.api.serializers.image_serializers">catalog.api.serializers.image_serializers module</a></li>
-<li><a class="reference internal" href="#module-catalog.api.serializers.media_serializers">catalog.api.serializers.media_serializers module</a></li>
+<li><a class="reference internal" href="#catalog-api-serializers-media-serializers-module">catalog.api.serializers.media_serializers module</a></li>
 <li><a class="reference internal" href="#module-catalog.api.serializers.oauth2_serializers">catalog.api.serializers.oauth2_serializers module</a></li>
 <li><a class="reference internal" href="#module-catalog.api.serializers.provider_serializers">catalog.api.serializers.provider_serializers module</a></li>
 <li><a class="reference internal" href="#module-catalog.api.serializers">Module contents</a></li>
