@@ -18,7 +18,7 @@ import requests
 
 # Uses Bottle because, unlike Falcon, it can be run from within the test suite.
 from bottle import Bottle
-from elasticsearch import Elasticsearch, RequestsHttpConnection
+from elasticsearch import Elasticsearch, NotFoundError, RequestsHttpConnection
 
 from .gen_integration_compose import gen_integration_compose
 from .test_constants import service_ports
@@ -263,6 +263,21 @@ class TestIngestion(unittest.TestCase):
         es = self._get_es()
         assert list(es.indices.get(index=alias).keys())[0] == f"{model}-{suffix}"
 
+    def _delete_index(self, model, suffix="integration", force_delete=False):
+        req = {
+            "model": model,
+            "action": "DELETE_INDEX",
+            "index_suffix": suffix,
+            "force_delete": force_delete,
+        }
+        res = requests.post(f"{ingestion_server}/task", json=req)
+        stat_msg = "The job should launch successfully and return 201 CREATED."
+        self.assertEqual(res.status_code, 201, msg=stat_msg)
+
+        es = self._get_es()
+        with pytest.raises(NotFoundError):
+            es.indices.get(index=f"{model}-{suffix}")
+
     @classmethod
     def setUpClass(cls) -> None:
         # Launch a Bottle server to receive and handle callbacks
@@ -453,3 +468,14 @@ class TestIngestion(unittest.TestCase):
 
         # Wait for the task to send us a callback.
         assert self.__class__.cb_queue.get(timeout=120) == "CALLBACK!"
+
+    @pytest.mark.order(12)
+    def test_index_deletion_succeeds(self):
+        self._ingest_upstream("image", "temporary")
+        self._delete_index("image", "temporary", False)
+
+    @pytest.mark.order(13)
+    def test_index_force_deletion_succeeds(self):
+        self._ingest_upstream("image", "temporary")
+        self._point_alias("image", "temporary", "image-temp")
+        self._delete_index("image", "temporary", True)
