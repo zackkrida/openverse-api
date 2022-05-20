@@ -462,3 +462,44 @@ class TableIndexer:
 
         if self.progress is not None:
             self.progress.value = 100  # mark job as completed
+
+    def delete_index(
+        self, model_name: str, index_suffix: str, force_delete: bool = False, **_
+    ):
+        """
+        Delete the given index ensuring that it is not in use.
+
+        :param model_name: the name of the media type
+        :param index_suffix: the suffix of the index to delete
+        :param force_delete: whether to delete the index even if it is in use
+        """
+
+        index_name = f"{model_name}-{index_suffix}"
+
+        try:
+            aliases = list(
+                self.es.indices.get(index=index_name)[index_name]["aliases"].keys()
+            )
+            if aliases and not force_delete:
+                # Existence of alias implies that index is in use.
+                message = (
+                    f"Index {index_name} is associated with aliases {aliases}, "
+                    f"cannot delete."
+                )
+                log.error(message)
+                slack.error(message)
+                return
+            else:
+                # No alias associated imp lies unused index.
+                self.es.indices.delete(index=index_name)
+                message = f"Index {index_name} was deleted."
+                log.info(message)
+                slack.info(message)
+        except NotFoundError:
+            # Index does not exist
+            message = f"Index {index_name} does not exist and cannot be deleted."
+            log.info(message)
+            slack.info(message)
+
+        if self.progress is not None:
+            self.progress.value = 100

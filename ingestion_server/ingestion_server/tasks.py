@@ -40,6 +40,9 @@ class TaskTypes(Enum):
     POINT_ALIAS = auto()
     """map a given index to a given alias, used when going live with an index"""
 
+    DELETE_INDEX = auto()
+    """delete the given index after it has been superseded by a new one"""
+
     LOAD_TEST_DATA = auto()
     """create indices in ES for QA tests; this is not intended to run in production but
     can be run without negative consequences"""

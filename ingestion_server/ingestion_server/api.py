@@ -61,6 +61,7 @@ class TaskResource(BaseTaskResource):
                 "since_date": {"type": "string"},
                 "index_suffix": {"type": "string"},
                 "alias": {"type": "string"},
+                "force_delete": {"type": "boolean"},
             },
             "required": ["model", "action"],
             "allOf": [
@@ -102,6 +103,7 @@ class TaskResource(BaseTaskResource):
         since_date = body.get("since_date")
         index_suffix = body.get("index_suffix", task_id)
         alias = body.get("alias")
+        force_delete = body.get("force_delete", False)
 
         # Shared memory
         progress = Value("d", 0.0)
@@ -122,6 +124,7 @@ class TaskResource(BaseTaskResource):
                 "since_date": since_date,
                 "index_suffix": index_suffix,
                 "alias": alias,
+                "force_delete": force_delete,
             },
         )
         task.start()
