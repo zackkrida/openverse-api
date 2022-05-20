@@ -1773,14 +1773,9 @@ classes should inherit their Meta class from this.</p>
 </dd></dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="catalog.api.models.media.AbstractMedia.attribution">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attribution</span></span><a class="headerlink" href="#catalog.api.models.media.AbstractMedia.attribution" title="Permalink to this definition">#</a></dt>
-<dd><p>Get the plain-text English attribution for a media item. Refer to the frontend
-source code for an internationalised implementation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the plain-text English-language attribution for a creative work</p>
-</dd>
-</dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#catalog.api.models.media.AbstractMedia.attribution" title="Permalink to this definition">#</a></dt>
+<dd><p>The plain-text English attribution for a media item. Use this to credit creators
+for their work and fulfill legal attribution requirements.</p>
 </dd></dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.models.media.AbstractMedia.category">
@@ -1854,8 +1849,9 @@ object the first time, the query is executed.</p>
 </dd></dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="catalog.api.models.media.AbstractMedia.license_url">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">license_url</span></span><a class="headerlink" href="#catalog.api.models.media.AbstractMedia.license_url" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">license_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#catalog.api.models.media.AbstractMedia.license_url" title="Permalink to this definition">#</a></dt>
+<dd><p>A direct link to the license deed or legal terms.</p>
+</dd></dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.models.media.AbstractMedia.license_version">
 <span class="sig-name descname"><span class="pre">license_version</span></span><a class="headerlink" href="#catalog.api.models.media.AbstractMedia.license_version" title="Permalink to this definition">#</a></dt>
@@ -2092,6 +2088,12 @@ object the first time, the query is executed.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
 <p>This mixin adds fields related to file such as the file URL and size to any
 model. Do not use this as the sole base class.</p>
+<p>This mixin adds</p>
+<ul class="simple">
+<li><p>url: URLField</p></li>
+<li><p>filesize: IntegerField</p></li>
+<li><p>filetype: CharField</p></li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.models.mixins.FileMixin.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#catalog.api.models.mixins.FileMixin.Meta" title="Permalink to this definition">#</a></dt>
@@ -2140,6 +2142,10 @@ object the first time, the query is executed.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
 <p>This mixin adds fields related to the external unique ID to any model. Do
 not use this as the sole base class.</p>
+<p>This mixin adds</p>
+<ul class="simple">
+<li><p>foreign_identifier: CharField</p></li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.models.mixins.ForeignIdentifierMixin.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#catalog.api.models.mixins.ForeignIdentifierMixin.Meta" title="Permalink to this definition">#</a></dt>
@@ -2162,9 +2168,10 @@ object the first time, the query is executed.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
 <p>This mixin adds fields related to unique ID, both internal and external, to
 any model. Do not use this as the sole base class.</p>
-<p>The mixins adds
-- identifier: UUIDField
-- foreign_identifier: CharField</p>
+<p>The mixins adds</p>
+<ul class="simple">
+<li><p>identifier: UUIDField</p></li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.models.mixins.IdentifierMixin.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#catalog.api.models.mixins.IdentifierMixin.Meta" title="Permalink to this definition">#</a></dt>
@@ -2187,11 +2194,15 @@ object the first time, the query is executed.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
 <p>This mixin adds fields related to a creative creation such as the title of
 the work and info about the artist. Do not use this as the sole base class.</p>
-<p>The mixin adds
-- title: CharField
-- foreign_landing_url: CharField
-- creator: CharField
-- creator_url: CharField</p>
+<p>The mixin adds</p>
+<ul class="simple">
+<li><p>title: CharField</p></li>
+<li><p>foreign_landing_url: CharField</p></li>
+<li><p>creator: CharField</p></li>
+<li><p>creator_url: CharField</p></li>
+<li><p>thumbnail: URLField</p></li>
+<li><p>provider: CharField</p></li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.models.mixins.MediaMixin.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#catalog.api.models.mixins.MediaMixin.Meta" title="Permalink to this definition">#</a></dt>
