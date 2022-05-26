@@ -502,13 +502,7 @@ class TableIndexer:
         :param force_delete: whether to delete the index even if it is in use
         """
 
-        if index_suffix is None and alias is None:
-            # No information provided, cannot proceed.
-            return
-        elif alias is None:
-            target = f"{model_name}-{index_suffix}"
-        else:
-            target = alias
+        target = alias if alias is not None else f"{model_name}-{index_suffix}"
 
         exists, is_alias, alt_names = self.get_stat(target)
         if exists:

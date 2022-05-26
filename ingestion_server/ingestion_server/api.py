@@ -77,6 +77,17 @@ class TaskResource(BaseTaskResource):
                     },
                     "then": {"required": ["index_suffix", "alias"]},
                 },
+                {
+                    "if": {
+                        "properties": {"action": {"const": TaskTypes.DELETE_INDEX.name}}
+                    },
+                    "then": {
+                        "oneOf": [
+                            {"required": ["alias"]},
+                            {"required": ["index_suffix"]},
+                        ]
+                    },
+                },
             ],
         }
     )
