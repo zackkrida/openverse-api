@@ -471,11 +471,11 @@ class TestIngestion(unittest.TestCase):
 
     @pytest.mark.order(12)
     def test_index_deletion_succeeds(self):
-        self._ingest_upstream("image", "temporary")
-        self._delete_index("image", "temporary", False)
+        self._ingest_upstream("audio", "temporary")
+        self._delete_index("audio", "temporary", False)
 
     @pytest.mark.order(13)
     def test_index_force_deletion_succeeds(self):
-        self._ingest_upstream("image", "temporary")
-        self._point_alias("image", "temporary", "image-temp")
-        self._delete_index("image", "temporary", True)
+        self._ingest_upstream("audio", "temporary")
+        self._point_alias("audio", "temporary", "audio-temp")
+        self._delete_index("audio", "temporary", True)
