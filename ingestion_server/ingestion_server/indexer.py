@@ -21,7 +21,7 @@ import time
 import uuid
 from collections import deque
 from multiprocessing import Value
-from typing import Optional
+from typing import Optional, Union
 
 import elasticsearch
 import psycopg2
@@ -190,6 +190,28 @@ class TableIndexer:
 
     # Helpers
     # =======
+
+    def get_stat(self, name_or_alias: str) -> tuple[bool, bool, Union[str, list[str]]]:
+        """
+        Get more information about the index name or alias given to the function. For
+        any given input, the function offers three bits of information:
+
+        - whether an alias or index of the name exists
+        - whether the name is an alias
+        - the index name that the alias points to/the aliases associated with the index
+
+        :param name_or_alias: the name of the index or an alias associated with it
+        :return: a tuple consisting of the three bits of information
+        """
+
+        try:
+            matches = self.es.indices.get(index=name_or_alias)
+            real_name = list(matches.keys())[0]
+            aliases = list(matches[real_name]["aliases"].keys())
+            is_alias = real_name != name_or_alias
+            return True, is_alias, real_name if is_alias else aliases
+        except NotFoundError:
+            return False, False, ""
 
     @staticmethod
     def pg_chunk_to_es(pg_chunk, columns, origin_table, dest_index):
@@ -424,15 +446,15 @@ class TableIndexer:
                 timeout="12h",
             )
 
-        try:
-            curr_index = list(self.es.indices.get(index=alias).keys())[0]
-            if curr_index == alias:
+        exists, is_alias, curr_index = self.get_stat(alias)
+        if exists:
+            if not is_alias:
                 # Alias is an index, this is fatal.
                 message = f"There is an index named {alias}, cannot proceed."
                 log.error(message)
                 slack.error(message)
                 return
-            elif curr_index != dest_index:
+            elif is_alias and curr_index != dest_index:
                 # Alias is in use, atomically remap it to the new index.
                 self.es.indices.update_aliases(
                     body={
@@ -453,7 +475,7 @@ class TableIndexer:
             else:
                 # Alias is already mapped.
                 log.info(f"Alias {alias} already points to index {dest_index}.")
-        except NotFoundError:
+        else:
             # Alias does not exist, create it.
             self.es.indices.put_alias(index=dest_index, name=alias)
             message = f"Created alias {alias} pointing to index {dest_index}."
@@ -464,40 +486,57 @@ class TableIndexer:
             self.progress.value = 100  # mark job as completed
 
     def delete_index(
-        self, model_name: str, index_suffix: str, force_delete: bool = False, **_
+        self,
+        model_name: str,
+        index_suffix: Optional[str] = None,
+        alias: Optional[str] = None,
+        force_delete: bool = False,
+        **_,
     ):
         """
         Delete the given index ensuring that it is not in use.
 
         :param model_name: the name of the media type
         :param index_suffix: the suffix of the index to delete
+        :param alias: the alias to delete, including the index it points to
         :param force_delete: whether to delete the index even if it is in use
         """
 
-        index_name = f"{model_name}-{index_suffix}"
+        if index_suffix is None and alias is None:
+            # No information provided, cannot proceed.
+            return
+        elif alias is None:
+            target = f"{model_name}-{index_suffix}"
+        else:
+            target = alias
 
-        try:
-            aliases = list(
-                self.es.indices.get(index=index_name)[index_name]["aliases"].keys()
-            )
-            if aliases and not force_delete:
-                # Existence of alias implies that index is in use.
-                message = (
-                    f"Index {index_name} is associated with aliases {aliases}, "
-                    f"cannot delete."
-                )
-                log.error(message)
-                slack.error(message)
-                return
+        exists, is_alias, alt_names = self.get_stat(target)
+        if exists:
+            if not is_alias:
+                if alt_names and not force_delete:
+                    # Existence of alias implies that index is in use.
+                    message = (
+                        f"Index {target} is associated with aliases {alt_names}, "
+                        f"cannot delete."
+                    )
+                    log.error(message)
+                    slack.error(message)
+                    return
+                else:
+                    perform_delete = True
             else:
-                # No alias associated imp lies unused index.
-                self.es.indices.delete(index=index_name)
-                message = f"Index {index_name} was deleted."
+                # Deleting by alias implies knowledge of associated risk.
+                target = alt_names
+                perform_delete = True
+
+            if perform_delete:
+                self.es.indices.delete(index=target)
+                message = f"Index {target} was deleted."
                 log.info(message)
                 slack.info(message)
-        except NotFoundError:
-            # Index does not exist
-            message = f"Index {index_name} does not exist and cannot be deleted."
+        else:
+            # Cannot delete as target does not exist.
+            message = f"Target {target} does not exist and cannot be deleted."
             log.info(message)
             slack.info(message)
 
