@@ -219,9 +219,13 @@ class TableIndexer:
             real_name = list(matches.keys())[0]
             aliases = list(matches[real_name]["aliases"].keys())
             is_alias = real_name != name_or_alias
-            return Stat(True, is_alias, real_name if is_alias else aliases)
+            return Stat(
+                exists=True,
+                is_alias=is_alias,
+                alt_names=real_name if is_alias else aliases,
+            )
         except NotFoundError:
-            return Stat(False, None, None)
+            return Stat(exists=False, is_alias=None, alt_names=None)
 
     @staticmethod
     def pg_chunk_to_es(pg_chunk, columns, origin_table, dest_index):
