@@ -21,7 +21,7 @@ import time
 import uuid
 from collections import deque
 from multiprocessing import Value
-from typing import Optional, Union
+from typing import NamedTuple, Optional, Union
 
 import elasticsearch
 import psycopg2
@@ -169,6 +169,16 @@ def get_last_item_ids(table):
     return last_added_pg_id, last_added_uuid
 
 
+class Stat(NamedTuple):
+    """
+    Contains information about the index or alias identified by its name.
+    """
+
+    exists: bool
+    is_alias: Optional[bool]
+    alt_names: Optional[Union[str, list[str]]]
+
+
 class TableIndexer:
     def __init__(
         self,
@@ -191,7 +201,7 @@ class TableIndexer:
     # Helpers
     # =======
 
-    def get_stat(self, name_or_alias: str) -> tuple[bool, bool, Union[str, list[str]]]:
+    def get_stat(self, name_or_alias: str) -> Stat:
         """
         Get more information about the index name or alias given to the function. For
         any given input, the function offers three bits of information:
@@ -201,7 +211,7 @@ class TableIndexer:
         - the index name that the alias points to/the aliases associated with the index
 
         :param name_or_alias: the name of the index or an alias associated with it
-        :return: a tuple consisting of the three bits of information
+        :return: a ``Stat`` instance containing the three bits of information
         """
 
         try:
@@ -209,9 +219,9 @@ class TableIndexer:
             real_name = list(matches.keys())[0]
             aliases = list(matches[real_name]["aliases"].keys())
             is_alias = real_name != name_or_alias
-            return True, is_alias, real_name if is_alias else aliases
+            return Stat(True, is_alias, real_name if is_alias else aliases)
         except NotFoundError:
-            return False, False, ""
+            return Stat(False, None, None)
 
     @staticmethod
     def pg_chunk_to_es(pg_chunk, columns, origin_table, dest_index):
