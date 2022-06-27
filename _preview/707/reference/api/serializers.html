@@ -262,7 +262,7 @@
 <p>Parse and validate search query string parameters.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.fields_names">
-<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa',</span> <span class="pre">'source',</span> <span class="pre">'excluded_source',</span> <span class="pre">'category',</span> <span class="pre">'length']</span></em><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa',</span> <span class="pre">'page_size',</span> <span class="pre">'source',</span> <span class="pre">'excluded_source',</span> <span class="pre">'category',</span> <span class="pre">'length']</span></em><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
 <dd><p>Keep the fields names in sync with the actual fields below as this list is
 used to generate Swagger documentation.</p>
 </dd></dl>
@@ -300,6 +300,11 @@ used to generate Swagger documentation.</p>
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSerializer.get_peaks">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_peaks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSerializer.get_peaks" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.audio_serializers.AudioSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Object instance -&gt; Dict of primitive datatypes.</p>
+</dd></dl>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="catalog.api.serializers.audio_serializers.AudioSetSerializer">
@@ -386,7 +391,7 @@ used to generate Swagger documentation.</p>
 <p>Parse and validate search query string parameters.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.fields_names">
-<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa',</span> <span class="pre">'source',</span> <span class="pre">'excluded_source',</span> <span class="pre">'category',</span> <span class="pre">'aspect_ratio',</span> <span class="pre">'size']</span></em><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa',</span> <span class="pre">'page_size',</span> <span class="pre">'source',</span> <span class="pre">'excluded_source',</span> <span class="pre">'category',</span> <span class="pre">'aspect_ratio',</span> <span class="pre">'size']</span></em><a class="headerlink" href="#catalog.api.serializers.image_serializers.ImageSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
 <dd><p>Keep the fields names in sync with the actual fields below as this list is
 used to generate Swagger documentation.</p>
 </dd></dl>
@@ -520,7 +525,7 @@ used to generate Swagger documentation.</p>
 <dd></dd></dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.fields_names">
-<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa']</span></em><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">fields_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['q',</span> <span class="pre">'license',</span> <span class="pre">'license_type',</span> <span class="pre">'creator',</span> <span class="pre">'tags',</span> <span class="pre">'title',</span> <span class="pre">'filter_dead',</span> <span class="pre">'extension',</span> <span class="pre">'mature',</span> <span class="pre">'qa',</span> <span class="pre">'page_size']</span></em><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.fields_names" title="Permalink to this definition">#</a></dt>
 <dd><p>Keep the fields names in sync with the actual fields below as this list is
 used to generate Swagger documentation.</p>
 </dd></dl>
@@ -546,6 +551,10 @@ used to generate Swagger documentation.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_license_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_license_type" title="Permalink to this definition">#</a></dt>
 <dd><p>Checks whether license type is a known collection of licenses.</p>
 </dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_page_size">
+<span class="sig-name descname"><span class="pre">validate_page_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_page_size" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_q">
 <span class="sig-name descname"><span class="pre">validate_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#catalog.api.serializers.media_serializers.MediaSearchRequestSerializer.validate_q" title="Permalink to this definition">#</a></dt>
