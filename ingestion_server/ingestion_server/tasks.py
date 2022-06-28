@@ -5,7 +5,7 @@ Simple in-memory tracking of executed tasks.
 import datetime
 import logging
 from enum import Enum, auto
-from multiprocessing import Process, Value
+from multiprocessing import Value
 from typing import Optional
 
 from ingestion_server import slack
@@ -66,7 +66,7 @@ class TaskTracker:
         # TODO: Populate, document or delete function stub
         pass
 
-    def add_task(self, task: Process, task_id: str, **kwargs):
+    def add_task(self, task_id: str, **kwargs):
         """
         Store information about a new task in memory.
         :param task: the task being performed
@@ -76,7 +76,6 @@ class TaskTracker:
         self._prune_old_tasks()
 
         self.tasks[task_id] = {
-            "task": task,
             "start_time": datetime.datetime.utcnow().timestamp(),
         } | kwargs
 
@@ -170,7 +169,6 @@ def perform_task(
         task_id,
         callback_url,
         progress,
-        finish_time,
         active_workers,
     )
 
@@ -200,4 +198,5 @@ def perform_task(
         )
         raise
 
+    finish_time.value = datetime.datetime.utcnow().timestamp()
     logging.info(f"Task {task_id} completed.")
