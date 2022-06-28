@@ -455,15 +455,16 @@ class TableIndexer:
                 timeout="12h",
             )
 
-        exists, is_alias, curr_index = self.get_stat(alias)
-        if exists:
-            if not is_alias:
+        alias_stat = self.get_stat(alias)
+        curr_index = alias_stat.alt_names
+        if alias_stat.exists:
+            if not alias_stat.is_alias:
                 # Alias is an index, this is fatal.
                 message = f"There is an index named {alias}, cannot proceed."
                 log.error(message)
                 slack.error(message)
                 return
-            elif is_alias and curr_index != dest_index:
+            elif alias_stat.is_alias and curr_index != dest_index:
                 # Alias is in use, atomically remap it to the new index.
                 self.es.indices.update_aliases(
                     body={
@@ -513,14 +514,14 @@ class TableIndexer:
 
         target = alias if alias is not None else f"{model_name}-{index_suffix}"
 
-        exists, is_alias, alt_names = self.get_stat(target)
-        if exists:
-            if not is_alias:
-                if alt_names and not force_delete:
+        target_stat = self.get_stat(target)
+        if target_stat.exists:
+            if not target_stat.is_alias:
+                if target_stat.alt_names and not force_delete:
                     # Existence of alias implies that index is in use.
                     message = (
-                        f"Index {target} is associated with aliases {alt_names}, "
-                        f"cannot delete."
+                        f"Index {target} is associated with aliases "
+                        f"{target_stat.alt_names}, cannot delete."
                     )
                     log.error(message)
                     slack.error(message)
@@ -529,7 +530,7 @@ class TableIndexer:
                     perform_delete = True
             else:
                 # Deleting by alias implies knowledge of associated risk.
-                target = alt_names
+                target = target_stat.alt_names
                 perform_delete = True
 
             if perform_delete:
