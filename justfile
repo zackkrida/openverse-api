@@ -238,6 +238,15 @@ ipython:
     @STATIC_ROOT="./static" just dj collectstatic --noinput
 
 
+############
+# Frontend #
+############
+
+# Run a package.json script via pnpm
+pnpm *args:
+    pnpm {{ args }}
+
+
 ##########
 # Sphinx #
 ##########

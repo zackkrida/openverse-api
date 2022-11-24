@@ -1,2 +1,8 @@
-# All files are owned by the [Openverse API team](https://github.com/orgs/WordPress/teams/openverse-api)
-* @WordPress/openverse-api
+# Files are owned by multiple teams
+api/                @WordPress/openverse-api
+frontend/           @WordPress/openverse-frontend
+ingestion_server/   @WordPress/openverse-api
+nginx/              @WordPress/openverse-api
+postgres/           @WordPress/openverse-api
+sample_data/        @WordPress/openverse-api
+*                   @WordPress/openverse

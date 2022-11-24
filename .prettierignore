@@ -2,3 +2,21 @@
 api/catalog/templates/drf-yasg/redoc.html
 api/docs/_templates/sidebar/brand.html
 api/docs/_templates/page.html
+
+# Test scaffolding
+test/unit/coverage
+test/tapes
+
+# Nuxt gunk
+.nuxt
+nuxt-template-overrides
+
+# Storybook gunk
+.nuxt-storybook
+storybook-static
+
+# Lockfile
+pnpm-lock.yaml
+
+# Build outputs
+dist

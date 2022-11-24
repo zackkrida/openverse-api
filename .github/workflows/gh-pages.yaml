@@ -1,0 +1,57 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - uses: ./.github/actions/setup-node-env
+
+      - name: Fetch translation files
+        run: pnpm i18n
+
+      - name: Build Storybook
+        run: pnpm storybook:build
+
+      - name: Build Tailwind Config Viewer
+        run: pnpm tcv:build
+
+      # This makes the TCV available at the `/tailwind` directory in the gh-pages
+      - name: Merge TCV and Storybook builds
+        run: |
+          mv .tcv-export ./storybook-static/tailwind
+          mv storybook-static /tmp/gh-pages
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - name: Preserve previews
+        run: mv _preview /tmp/gh-pages/_preview
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /tmp/gh-pages
+          force_orphan: true
+
+      - name: Checkout branch again to enable cleaning
+        if: always()
+        uses: actions/checkout@v3
+        with:
+          ref: main
