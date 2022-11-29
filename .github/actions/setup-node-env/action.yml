@@ -30,8 +30,10 @@ runs:
     - name: Install
       if: inputs.install
       shell: bash
+      working-directory: "frontend/"
       run: "pnpm install"
 
     - name: Copy locale files
       shell: bash
+      working-directory: "frontend/"
       run: "cp -r test/locales/* src/locales"
