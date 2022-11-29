@@ -34,7 +34,7 @@ jobs:
 
       - name: Update POT on `translations` branch
         run: |
-          rm openverse.pot
+          rm -f openverse.pot
           cp /tmp/openverse.pot openverse.pot
           git config --global user.name 'POT Updater'
           git config --global user.email 'openverse@wordpress.org'
