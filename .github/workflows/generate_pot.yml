@@ -25,7 +25,7 @@ jobs:
         run: just pnpm i18n:generate-pot
 
       - name: Copy to root
-        run: cp ./openverse.pot /tmp/openverse.pot
+        run: cp frontend/openverse.pot /tmp/openverse.pot
 
       - name: Checkout `translations` branch
         uses: actions/checkout@v3
