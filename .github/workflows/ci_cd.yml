@@ -22,6 +22,8 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
 
       - name: Run pre-commit to lint files
@@ -37,6 +39,8 @@ jobs:
           - api
           - ingestion_server
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -71,6 +75,8 @@ jobs:
       - build-images
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -118,6 +124,8 @@ jobs:
     needs:
       - build-images
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -156,6 +164,8 @@ jobs:
     needs:
       - build-images
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -196,6 +206,8 @@ jobs:
     needs:
       - build-images
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -220,6 +232,8 @@ jobs:
     needs:
       - build-images
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -251,6 +265,8 @@ jobs:
     needs:
       - build-images
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -275,6 +291,8 @@ jobs:
     needs:
       - build-images
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -344,6 +362,8 @@ jobs:
       - build-images
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -415,6 +435,8 @@ jobs:
           body: |
             **API Developer Docs Preview**: _Updating_
             (This comment will be automatically updated with the preview URLs once it is ready)
+
+      - uses: actions/checkout@v3
 
       - uses: ./.github/actions/setup-env
         with:

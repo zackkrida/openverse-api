@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -58,6 +60,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -76,6 +80,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -118,6 +124,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -130,6 +138,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
@@ -165,6 +175,8 @@ jobs:
           body: |
             **Storybook and Tailwind configuration previews**: _Updating_
             (This comment will be automatically updated with the preview URLs once they are ready)
+
+      - uses: actions/checkout@v3
 
       - uses: ./.github/actions/setup-env
         with:
