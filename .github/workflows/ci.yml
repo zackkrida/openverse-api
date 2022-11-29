@@ -28,19 +28,6 @@ jobs:
       - name: Check types
         run: just pnpm types
 
-  lint:
-    name: Lint files
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
-
-      - name: Lint with ESLint and Prettier
-        run: just pnpm pc:lint
-
   unit:
     name: Unit tests
     runs-on: ubuntu-latest
