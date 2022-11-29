@@ -21,10 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: extractions/setup-just@v1
+
       - uses: ./.github/actions/setup-node-env
 
       - name: Check types
-        run: pnpm types
+        run: just pnpm types
 
   lint:
     name: Lint files
@@ -32,11 +34,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Lint with ESLint and Prettier
-        run: pnpm pc:lint
+        run: just pnpm pc:lint
 
   unit:
     name: Unit tests
@@ -44,11 +47,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Run unit tests
-        run: pnpm test:unit
+        run: just pnpm test:unit
 
   clean-playwright-failure-comment:
     name: Remove previous Playwright test failure comments
@@ -79,11 +83,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Run Nuxt Playwright tests
-        run: pnpm test:playwright --workers=2
+        run: just pnpm test:playwright --workers=2
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -97,11 +102,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Run Storybook Playwright tests
-        run: pnpm test:storybook
+        run: just pnpm test:storybook
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -139,11 +145,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Run Storybook smoke-test
-        run: pnpm storybook:smoke
+        run: just pnpm storybook:smoke
 
   build:
     name: Check Nuxt build
@@ -151,11 +158,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Run build
-        run: pnpm build
+        run: just pnpm build
 
   gh-pages:
     name: PR Storybook and Tailwind Preview
@@ -188,17 +196,18 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Fetch translation files
-        run: pnpm i18n
+        run: just pnpm i18n
 
       - name: Build Storybook
-        run: pnpm storybook:build
+        run: just pnpm storybook:build
 
       - name: Build Tailwind Config Viewer
-        run: pnpm tcv:build
+        run: just pnpm tcv:build
 
       # This makes the TCV available at the `/tailwind` directory in the gh-pages
       - name: Merge TCV and Storybook builds

@@ -17,11 +17,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: main
+      - uses: extractions/setup-just@v1
 
       - uses: ./.github/actions/setup-node-env
 
       - name: Generate PO
-        run: pnpm i18n:generate-pot
+        run: just pnpm i18n:generate-pot
 
       - name: Copy to root
         run: cp ./openverse.pot /tmp/openverse.pot
