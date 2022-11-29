@@ -31,8 +31,8 @@ jobs:
       # This makes the TCV available at the `/tailwind` directory in the gh-pages
       - name: Merge TCV and Storybook builds
         run: |
-          mv .tcv-export ./storybook-static/tailwind
-          mv storybook-static /tmp/gh-pages
+          mv frontend/.tcv-export /frontend/storybook-static/tailwind
+          mv frontend/storybook-static /tmp/gh-pages
 
       - name: Checkout
         uses: actions/checkout@v3
