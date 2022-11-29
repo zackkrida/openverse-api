@@ -99,6 +99,7 @@ init: _api-up
 @install:
     just _api-install
     just _ing-install
+    just _frd-install
 
 # Setup pre-commit as a Git hook
 precommit:
@@ -241,6 +242,9 @@ ipython:
 ############
 # Frontend #
 ############
+
+_frd-install *args:
+    just pnpm install {{ args }}
 
 # Run a package.json script via pnpm
 pnpm *args:
