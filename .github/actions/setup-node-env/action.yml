@@ -10,6 +10,8 @@ runs:
   using: "composite"
   steps:
     - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 7.1.0 # ensure that it matchers `packageManager` field in `frontend/package.json`
 
     - name: Cache pnpm modules
       uses: actions/cache@v3
