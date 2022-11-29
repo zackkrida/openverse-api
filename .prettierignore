@@ -4,8 +4,8 @@ api/docs/_templates/sidebar/brand.html
 api/docs/_templates/page.html
 
 # Test scaffolding
-test/unit/coverage
-test/tapes
+frontend/test/unit/coverage
+frontend/test/tapes
 
 # Nuxt gunk
 .nuxt
