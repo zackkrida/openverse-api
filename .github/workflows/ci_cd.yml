@@ -22,26 +22,10 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.10"
-
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node-env
-
-      - name: Cache pre-commit envs
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/pre-commit
-          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+      - uses: ./.github/actions/setup-env
 
       - name: Run pre-commit to lint files
         run: |
-          pip install pre-commit
           pre-commit run --all-files
 
   build-images:
@@ -53,8 +37,10 @@ jobs:
           - api
           - ingestion_server
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -85,8 +71,10 @@ jobs:
       - build-images
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -130,29 +118,13 @@ jobs:
     needs:
       - build-images
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
+      - uses: ./.github/actions/setup-env
         with:
-          python-version: "3.10"
-
-      - name: Cache Python dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          setup_python: false
+          setup_nodejs: false
 
       - name: Install Python deps for ingestion-server
         run: |
-          pip install -U pip
-          pip install pipenv
           just _ing-install
 
       - name: Download image `ingestion_server`
@@ -184,11 +156,10 @@ jobs:
     needs:
       - build-images
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -225,11 +196,10 @@ jobs:
     needs:
       - build-images
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -250,8 +220,10 @@ jobs:
     needs:
       - build-images
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -279,11 +251,10 @@ jobs:
     needs:
       - build-images
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -304,11 +275,10 @@ jobs:
     needs:
       - build-images
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -374,11 +344,10 @@ jobs:
       - build-images
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -447,11 +416,10 @@ jobs:
             **API Developer Docs Preview**: _Updating_
             (This comment will be automatically updated with the preview URLs once it is ready)
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup just
-        uses: extractions/setup-just@v1
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2

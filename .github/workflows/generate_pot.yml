@@ -13,13 +13,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-env
         with:
-          ref: main
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+          setup_python: false
 
       - name: Generate PO
         run: just pnpm i18n:generate-pot

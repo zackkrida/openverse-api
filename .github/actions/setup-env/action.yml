@@ -1,0 +1,94 @@
+name: openverse/setup-env
+description: Setup Openverse CI environment
+
+inputs:
+  setup_python:
+    default: true
+    description: Whether to set up Python and install dependencies
+
+  setup_nodejs:
+    default: true
+    description: Whether to set up Node.js and dependencies
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup just
+      uses: extractions/setup-just@v1
+
+    # Python
+    # ======
+
+    - name: Setup Python
+      if: inputs.setup_python
+      uses: actions/setup-python@v2
+      with:
+        # Ensure that it matches `python_version` field in the following files:
+        # - `api/Pipfile`
+        # - `ingestion_server/Pipfile`
+        python-version: "3.10"
+
+    - name: Cache pip modules
+      if: inputs.setup_python
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Setup global Python deps
+      if: inputs.setup_python
+      shell: bash
+      run: |
+        pip install -U pip
+        pip install pipenv pre-commit
+
+    # Node.js
+    # =======
+
+    - name: Setup Node.js
+      if: inputs.setup_nodejs
+      uses: actions/setup-node@v3
+      with:
+        # Ensure that it matches `engines` field in the following files:
+        # - `frontend/package.json`
+        node-version: "16"
+        cache: pnpm
+        cache-dependency-path: |
+          frontend/pnpm-lock.yaml
+          frontend/.npmrc
+
+    - name: Cache pnpm modules
+      if: inputs.setup_nodejs
+      uses: actions/cache@v3
+      with:
+        path: ~/.local/share/pnpm/store
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-
+
+    - name: Setup pnpm
+      if: inputs.setup_nodejs
+      uses: pnpm/action-setup@v2
+      with:
+        # Ensure that it matchers `packageManager` field in the following files:
+        # - `frontend/package.json`
+        version: 7.1.0
+
+    - name: Setup JS deps
+      if: inputs.setup_nodejs
+      shell: bash
+      working-directory: "frontend/"
+      run: |
+        pnpm install
+
+    - name: Prepare JS workspace
+      if: inputs.setup_nodejs
+      shell: bash
+      working-directory: "frontend/"
+      run: |
+        cp -r test/locales/* src/locales

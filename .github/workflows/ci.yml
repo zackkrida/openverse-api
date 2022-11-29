@@ -18,25 +18,14 @@ jobs:
     name: Check types
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
-
-      - name: Check types
-        run: just pnpm types
-
   unit:
     name: Unit tests
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
 
       - name: Run unit tests
         run: just pnpm test:unit
@@ -69,10 +58,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
 
       - name: Run Nuxt Playwright tests
         run: just pnpm test:playwright --workers=2
@@ -88,10 +76,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
 
       - name: Run Storybook Playwright tests
         run: just pnpm test:storybook
@@ -131,10 +118,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
 
       - name: Run Storybook smoke-test
         run: just pnpm storybook:smoke
@@ -144,10 +130,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
 
       - name: Run build
         run: just pnpm build
@@ -181,11 +166,9 @@ jobs:
             **Storybook and Tailwind configuration previews**: _Updating_
             (This comment will be automatically updated with the preview URLs once they are ready)
 
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: extractions/setup-just@v1
-
-      - uses: ./.github/actions/setup-node-env
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
 
       - name: Fetch translation files
         run: just pnpm i18n
