@@ -14,10 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  types:
-    name: Check types
-    runs-on: ubuntu-latest
-
   unit:
     name: Unit tests
     runs-on: ubuntu-latest

@@ -3,11 +3,11 @@ description: Setup Openverse CI environment
 
 inputs:
   setup_python:
-    default: true
+    default: "true"
     description: Whether to set up Python and install dependencies
 
   setup_nodejs:
-    default: true
+    default: "true"
     description: Whether to set up Node.js and dependencies
 
 runs:
@@ -20,7 +20,7 @@ runs:
     # ======
 
     - name: Setup Python
-      if: inputs.setup_python
+      if: inputs.setup_python == 'true'
       uses: actions/setup-python@v2
       with:
         # Ensure that it matches `python_version` field in the following files:
@@ -29,7 +29,7 @@ runs:
         python-version: "3.10"
 
     - name: Cache pip modules
-      if: inputs.setup_python
+      if: inputs.setup_python == 'true'
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
@@ -38,7 +38,7 @@ runs:
           ${{ runner.os }}-pip-
 
     - name: Setup global Python deps
-      if: inputs.setup_python
+      if: inputs.setup_python == 'true'
       shell: bash
       run: |
         pip install -U pip
@@ -47,8 +47,16 @@ runs:
     # Node.js
     # =======
 
+    - name: Setup pnpm
+      if: inputs.setup_nodejs == 'true'
+      uses: pnpm/action-setup@v2
+      with:
+        # Ensure that it matchers `packageManager` field in the following files:
+        # - `frontend/package.json`
+        version: 7.1.0
+
     - name: Setup Node.js
-      if: inputs.setup_nodejs
+      if: inputs.setup_nodejs == 'true'
       uses: actions/setup-node@v3
       with:
         # Ensure that it matches `engines` field in the following files:
@@ -60,7 +68,7 @@ runs:
           frontend/.npmrc
 
     - name: Cache pnpm modules
-      if: inputs.setup_nodejs
+      if: inputs.setup_nodejs == 'true'
       uses: actions/cache@v3
       with:
         path: ~/.local/share/pnpm/store
@@ -68,23 +76,15 @@ runs:
         restore-keys: |
           ${{ runner.os }}-
 
-    - name: Setup pnpm
-      if: inputs.setup_nodejs
-      uses: pnpm/action-setup@v2
-      with:
-        # Ensure that it matchers `packageManager` field in the following files:
-        # - `frontend/package.json`
-        version: 7.1.0
-
     - name: Setup JS deps
-      if: inputs.setup_nodejs
+      if: inputs.setup_nodejs == 'true'
       shell: bash
       working-directory: "frontend/"
       run: |
         pnpm install
 
     - name: Prepare JS workspace
-      if: inputs.setup_nodejs
+      if: inputs.setup_nodejs == 'true'
       shell: bash
       working-directory: "frontend/"
       run: |
