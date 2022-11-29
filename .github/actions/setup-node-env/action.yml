@@ -26,8 +26,8 @@ runs:
         node-version: 16
         cache: pnpm
         cache-dependency-path: |
-          pnpm-lock.yaml
-          .npmrc
+          frontend/pnpm-lock.yaml
+          frontend/.npmrc
 
     - name: Install
       if: inputs.install
