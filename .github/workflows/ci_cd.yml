@@ -128,7 +128,6 @@ jobs:
 
       - uses: ./.github/actions/setup-env
         with:
-          setup_python: false
           setup_nodejs: false
 
       - name: Install Python deps for ingestion-server
