@@ -401,8 +401,8 @@ jobs:
     needs:
       - build-images
     env:
-      repo_owner: ${{ github.event.repository.owner }}
-      repo_name: ${{ github.event.repository.name }}
+      repo_owner: ${{ github.event.pull_request.head.repo.owner.login }}
+      repo_name: ${{ github.event.pull_request.head.repo.name }}
     steps:
       - uses: peter-evans/find-comment@v2
         id: preview-comment
