@@ -404,7 +404,7 @@ jobs:
           ref: main
 
   docs-preview:
-    name: Publish preview of developer docs for the branch
+    name: Developer docs, Storybook, Tailwind config previews
     runs-on: ubuntu-latest
     # Check if the event is not triggered by a fork or dependabot
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.owner.login == 'WordPress' && github.actor != 'dependabot[bot]'
@@ -416,7 +416,7 @@ jobs:
         id: preview-comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body-includes: API Developer Docs Preview
+          body-includes: Developer docs, Storybook, Tailwind config previews
 
       - uses: peter-evans/create-or-update-comment@v2
         if: steps.preview-comment.outputs.comment-id != 0
@@ -424,7 +424,7 @@ jobs:
           comment-id: ${{ steps.preview-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
-            **API Developer Docs Preview**: _Updating_
+            **Developer docs, Storybook, Tailwind config previews**: _Updating_
             (This comment will be automatically updated with the preview URL once it is ready)
 
       - uses: peter-evans/create-or-update-comment@v2
@@ -432,7 +432,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            **API Developer Docs Preview**: _Updating_
+            **Developer docs, Storybook, Tailwind config previews**: _Updating_
             (This comment will be automatically updated with the preview URLs once it is ready)
 
       - uses: actions/checkout@v3
@@ -440,7 +440,6 @@ jobs:
       - uses: ./.github/actions/setup-env
         with:
           setup_python: false
-          setup_nodejs: false
 
       - name: Download all images
         uses: actions/download-artifact@v2
@@ -452,11 +451,27 @@ jobs:
           docker load --input /tmp/api/api.tar
           docker load --input /tmp/ingestion_server/ingestion_server.tar
 
-      - name: Build docs
+      - name: Compile Sphinx
         run: |
           just sphinx-make
           sudo chown "$USER:$USER" -R ./api
           mv ./api/build/html /tmp/preview
+
+      # Storybook will be available at `/storybook`
+      - name: Build Storybook
+        run: |
+          just pnpm i18n
+          just pnpm storybook:build
+
+      # Tailwind will be available at `/tailwind`
+      - name: Build Tailwind Config Viewer
+        run: |
+          just pnpm tcv:build
+
+      - name: Merge Storybook and TCV
+        run: |
+          mv frontend/storybook-static /tmp/preview/storybook
+          mv frontend/.tcv-export /tmp/preview/tailwind
 
       # Otherwise we end up with any extra stuff not git-ignored in the gh-pages branch
       - name: Recreate working directory to avoid superfluous files
@@ -497,7 +512,7 @@ jobs:
           comment-id: ${{ steps.final-preview-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
-            **API Developer Docs Preview**: _Ready_
+            **Developer docs, Storybook, Tailwind config previews**: _Ready_
 
             <https://wordpress.github.io/openverse-api/_preview/${{ github.event.pull_request.number }}>
 
