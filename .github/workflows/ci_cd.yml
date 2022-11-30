@@ -396,7 +396,8 @@ jobs:
     name: Developer docs, Storybook, Tailwind config previews
     runs-on: ubuntu-latest
     # Check if the event is not triggered by a fork or dependabot
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.owner.login == 'WordPress' && github.actor != 'dependabot[bot]'
+    # TODO: Change repo.owner.login to 'WordPress'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.owner.login == 'dhruvkb' && github.actor != 'dependabot[bot]'
     needs:
       - build-images
 
