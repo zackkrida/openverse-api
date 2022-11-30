@@ -33,7 +33,8 @@ jobs:
   build:
     name: Check
     runs-on: ubuntu-latest
-    if: github.repository == 'WordPress/openverse-frontend'
+    # TODO: change to wordpress
+    if: github.event.pull_request.head.repo.owner.login == 'dhruvkb'
 
     steps:
       - uses: actions/checkout@v3
@@ -44,8 +45,8 @@ jobs:
 
       - uses: preactjs/compressed-size-action@2.5.0
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          # repo-token: "${{ secrets.GITHUB_TOKEN }}"
           # Only measure changes in the client, we don't care much about the size of the server bundles (I don't think?)
           pattern: "./.nuxt/dist/client/**/*.{modern.js,js,css}"
           exclude: "{./.nuxt/dist/client/lang-*.json.js,./.nuxt/dist/client/lang-*.json.modern.js}"
-          minimum-change-threshold: 10
+          # minimum-change-threshold: 10 TODO: uncomment me
