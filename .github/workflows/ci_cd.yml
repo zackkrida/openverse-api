@@ -199,8 +199,22 @@ jobs:
           name: api_logs
           path: api_logs
 
+  test-frd:
+    name: Run tests for the frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+
+      - name: Run unit tests
+        run: just pnpm test:unit
+
   test-redoc:
-    name: Check for API consumer docs
+    name: Check for API consumer docs smoke
     runs-on: ubuntu-latest
     needs:
       - build-images
@@ -258,6 +272,19 @@ jobs:
           name: openverse-api-openapi-schema.yaml
           path: ./api/openapi.yaml
 
+  test-storybook:
+    name: Check for Storybook smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+
+      - name: Run Storybook smoke-test
+        run: just pnpm storybook:smoke
+
   django-check:
     name: Run Django check
     runs-on: ubuntu-latest
@@ -283,6 +310,19 @@ jobs:
 
       - name: Run check
         run: just dj check
+
+  test_frd_build:
+    name: Check Nuxt build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup-env
+        with:
+          setup_python: false
+
+      - name: Run build
+        run: just pnpm build
 
   check-migrations:
     name: Check for uncommited Django migrations
