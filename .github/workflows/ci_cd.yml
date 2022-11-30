@@ -400,7 +400,9 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.owner.login == 'dhruvkb' && github.actor != 'dependabot[bot]'
     needs:
       - build-images
-
+    env:
+      repo_owner: ${{ github.event.repository.owner }}
+      repo_name: ${{ github.event.repository.name }}
     steps:
       - uses: peter-evans/find-comment@v2
         id: preview-comment
@@ -415,6 +417,7 @@ jobs:
           edit-mode: replace
           body: |
             **Developer docs, Storybook, Tailwind config previews**: _Updating_
+
             (This comment will be automatically updated with the preview URL once it is ready)
 
       - uses: peter-evans/create-or-update-comment@v2
@@ -423,6 +426,7 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             **Developer docs, Storybook, Tailwind config previews**: _Updating_
+
             (This comment will be automatically updated with the preview URLs once it is ready)
 
       - uses: actions/checkout@v3
@@ -467,8 +471,8 @@ jobs:
       - name: Recreate working directory to avoid superfluous files
         run: |
           cd ..
-          sudo rm -rf openverse-api
-          mkdir openverse-api
+          sudo rm -rf $repo_name
+          mkdir $repo_name
 
       - uses: actions/checkout@v3
         with:
@@ -477,12 +481,12 @@ jobs:
       - name: Merge preview with existing gh-pages
         run: |
           cd ..
-          cp -r ./openverse-api /tmp/gh-pages
+          cp -r $repo_name /tmp/gh-pages
           # trash the existing preview folder and replace it with the newly generated one
           # if the preview hasn't been pushed yet this will still exit(0)
           sudo rm -rf /tmp/gh-pages/_preview/${{ github.event.pull_request.number }}
           mv /tmp/preview /tmp/gh-pages/_preview/${{ github.event.pull_request.number }}
-          cd openverse-api
+          cd $repo_name
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -504,11 +508,11 @@ jobs:
           body: |
             **Developer docs, Storybook, Tailwind config previews**: _Ready_
 
-            <https://wordpress.github.io/openverse-api/_preview/${{ github.event.pull_request.number }}>
+            <https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/_preview/${{ github.event.pull_request.number }}>
 
             Please note that GitHub pages takes a little time to deploy newly pushed code, if the links above don't work or you see old versions, wait 5 minutes and try again.
 
-            You can check [the GitHub pages deployment action list](https://github.com/WordPress/openverse-api/actions/workflows/pages/pages-build-deployment) to see the current status of the deployments.
+            You can check [the GitHub pages deployment action list](https://github.com/${{ github.repository }}/actions/workflows/pages/pages-build-deployment) to see the current status of the deployments.
 
       - name: Checkout branch again to enable cleaning
         uses: actions/checkout@v3
