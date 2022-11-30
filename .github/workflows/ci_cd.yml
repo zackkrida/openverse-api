@@ -499,7 +499,7 @@ jobs:
         id: final-preview-comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body-includes: API Developer Docs Preview
+          body-includes: Developer docs, Storybook, Tailwind config previews
 
       - uses: peter-evans/create-or-update-comment@v2
         with:
