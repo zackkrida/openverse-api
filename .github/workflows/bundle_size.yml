@@ -39,10 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: ./.github/actions/setup-env
-        with:
-          setup_python: false
-
       - uses: preactjs/compressed-size-action@2.5.0
         with:
           # repo-token: "${{ secrets.GITHUB_TOKEN }}"
