@@ -471,8 +471,8 @@ jobs:
       - name: Recreate working directory to avoid superfluous files
         run: |
           cd ..
-          sudo rm -rf $repo_name
-          mkdir $repo_name
+          sudo rm -rf "$repo_name"
+          mkdir "$repo_name"
 
       - uses: actions/checkout@v3
         with:
@@ -481,12 +481,12 @@ jobs:
       - name: Merge preview with existing gh-pages
         run: |
           cd ..
-          cp -r $repo_name /tmp/gh-pages
+          cp -r "$repo_name" /tmp/gh-pages
           # trash the existing preview folder and replace it with the newly generated one
           # if the preview hasn't been pushed yet this will still exit(0)
           sudo rm -rf /tmp/gh-pages/_preview/${{ github.event.pull_request.number }}
           mv /tmp/preview /tmp/gh-pages/_preview/${{ github.event.pull_request.number }}
-          cd $repo_name
+          cd "$repo_name"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
