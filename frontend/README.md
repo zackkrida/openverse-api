@@ -1,3 +1,5 @@
+Testing, testing, 1,2,3!
+
 <img src="https://github.com/WordPress/openverse/raw/main/brand/banner.svg" width="100%"/>
 
 <p align="center">
